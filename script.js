@@ -3,13 +3,72 @@ var mainEl = document.getElementById('main');
 
 var currentIndex = 0;
 
-var questions = [
+var questionOne = [
     {
-        question: 'What is...',
-        answers: ['a', 'b', 'c', 'd'],
+        question: 'Commonly used data types DO NOT include:',
+        answers: {
+                a:'Strings',
+                b: 'B. Booleans', 
+                c: 'Alerts', 
+                d: 'Numbers', 
+        },
+
+        answer: '',
+    }
+]
+
+var questionTwo = [
+    {
+        question: 'The condition in an if/else statement is enclosed within _____.',
+        answers: {
+            a: 'Quotes', 
+            b: 'Curly brackets', 
+            c: 'Parenthesis', 
+            d: 'Square brackets',
+        },
         answer: 'c',
     }
 ]
+
+var questionThree = [
+    {
+        question: 'Arrays in JavaScript can be used to store ____.',
+        answers: {
+            a: 'Numbers and strings', 
+            b: 'Other arrays', 
+            c: 'Booleans', 
+            d: 'All of the above',
+        },
+        answer: 'c',
+    }
+]
+
+var questionFour = [
+    {
+        question: 'String values must be enclosed within ____ when being assigned to variables.',
+        answers: {
+            a: 'Commas', 
+            b: 'Curly brackets', 
+            c: 'Quotes', 
+            d: 'Parentheses',
+        },
+        answer: 'c',
+    }
+]
+
+var questionFive = [
+    {
+        question: 'A veru useful tool used during development and debugging for printing content to the debugger is:',
+        answers: {
+            a: 'JavaScript', 
+            b: 'Terminal/bash', 
+            c: 'For loops', 
+            d: 'Console.log',
+        },
+        answer: 'd',
+    }
+]
+
 
 function displayQuestion() {
     var currentQuestion = questions[currentIndex];
@@ -17,13 +76,13 @@ function displayQuestion() {
     Element.textContent = currentQuestion.question;
 }
 function quizStart() {
-    // var quiz-start 
-    // if ("click") {
-    //     displayQuestion();
-    //     countdown();
-    //     document.getElementById("quizStart").click();
-    //     console.log();
-    //     }
+    var questionChoice = answer; 
+    if ("click") {
+        displayQuestion();
+        countdown();
+        document.getElementById("quizStart").click();
+        console.log();
+        }
 }
 
 function countdown() {
