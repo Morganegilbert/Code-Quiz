@@ -1,9 +1,10 @@
-var timerEl = document.getElementById('countdown');
+var timerEl = document.getElementById('.countdown');
 var mainEl = document.getElementById('main');
 
-var currentIndex = 0;
+var button = document.querySelector(".button");
 
-var questionOne = [
+var currentIndex = 0;
+const myQuestions = [
     {
         question: 'Commonly used data types DO NOT include:',
         answers: {
@@ -12,13 +13,8 @@ var questionOne = [
                 c: 'Alerts', 
                 d: 'Numbers', 
         },
+        correctAnswer: '',
 
-        answer: '',
-    }
-]
-
-var questionTwo = [
-    {
         question: 'The condition in an if/else statement is enclosed within _____.',
         answers: {
             a: 'Quotes', 
@@ -26,12 +22,8 @@ var questionTwo = [
             c: 'Parenthesis', 
             d: 'Square brackets',
         },
-        answer: 'c',
-    }
-]
+        correctAnswer: 'c',
 
-var questionThree = [
-    {
         question: 'Arrays in JavaScript can be used to store ____.',
         answers: {
             a: 'Numbers and strings', 
@@ -39,12 +31,8 @@ var questionThree = [
             c: 'Booleans', 
             d: 'All of the above',
         },
-        answer: 'c',
-    }
-]
+        correctAnswer: 'c',
 
-var questionFour = [
-    {
         question: 'String values must be enclosed within ____ when being assigned to variables.',
         answers: {
             a: 'Commas', 
@@ -52,12 +40,8 @@ var questionFour = [
             c: 'Quotes', 
             d: 'Parentheses',
         },
-        answer: 'c',
-    }
-]
+        correctAnswer: 'c',
 
-var questionFive = [
-    {
         question: 'A veru useful tool used during development and debugging for printing content to the debugger is:',
         answers: {
             a: 'JavaScript', 
@@ -65,22 +49,29 @@ var questionFive = [
             c: 'For loops', 
             d: 'Console.log',
         },
-        answer: 'd',
-    }
-]
+        correctAnswer: 'd',
 
+    }
+];
+
+// button.addEventListener("click", function (quizStart){
+
+
+// }
+// );
 
 function displayQuestion() {
-    var currentQuestion = questions[currentIndex];
+    // var currentQuestion = questions[currentIndex];
 
-    Element.textContent = currentQuestion.question;
-}
+    // Element.textContent = currentQuestion.question;
+    }
+
 function quizStart() {
-    var questionChoice = answer; 
+    // var questionChoice = answer; 
     if ("click") {
         displayQuestion();
         countdown();
-        document.getElementById("quizStart").click();
+        // document.getElementById("quizStart").click();
         console.log();
         }
 }
@@ -127,4 +118,9 @@ function countdown() {
 //     var msgInterval = 
 // }
 
-// quizStart();
+quizStart();
+
+// var results = {
+
+// }
+// localStorage.setItem(input, J)
