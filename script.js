@@ -1,24 +1,22 @@
-console.log(document);
 
 var containerEl = document.getElementById('header-container');
-console.log(containerEl);
 
 var headerEl = document.getElementById('quiz-header');
-console.log('this is my header', headerEl);
 
-// var infoEl = document.getElementById('quiz-info');
-// console.log(infoEl);
+var infoEl = document.getElementById('quiz-info');
 
 var highscoresEl = document.getElementById('highscores');
-console.log(highscoresEl);
 
 var timerEl = document.getElementById('countdown');
 // var mainEl = document.getElementById('main');
-console.log(timerEl);
 
 var startEl = document.getElementById('start-quiz');
-console.log(startEl);
 
+var quizHeaderContent = document.getElementById('quiz-header-content');
+console.log(quizHeaderContent);
+
+var quizInfoContent = document.getElementById('quiz-info-content');
+console.log(quizInfoContent);
 // var button = document.querySelector(".button");
 
 startEl.addEventListener("click", function() {quizStart(); }, false);
@@ -80,30 +78,62 @@ function displayQuestion() {
 
 function quizStart() {
     // var questionChoice = answer; 
-    console.log(myQuestions);
-    console.log(currentIndex)
 
         var question = myQuestions[currentIndex];
-        console.log(question)
+        console.log(question);
 
         // replace header with question
         replaceHeader(question?.question);
 
         // create html list of questions from myQuestions
-
+        var list = createList(question?.answers, question?.questions);
+        
 
         // replace quiz-info with created html list
+        infoEl.innerHTML = list.innerHTML;
+
+        // asign list functionality
+        assignListFunctionality(question?.answers, question?.questions);
 
         // iterating current index
+        currentIndex++;
+}
+
+function assignListFunctionality(answers,questions) {
+    for (var i = 0; i < answers.length; i++) {
+        let listItem = document.getElementById('answer-' + i);
+        listItem.addEventListener("click", function() {functionName();}, false);
+
+    }
 }
 
 function replaceHeader(question) {
-    let newHeaderEl = document.createElement('h2')
+    let newHeaderEl = document.createElement('h2');
+    newHeaderEl.id = 'quiz-header-content';
     newHeaderEl.textContent = question; 
-    headerEl.replaceWith(newHeaderEl);
-
+    quizHeaderContent.innerHTML = newHeaderEl.innerHTML;
 }
 
+function createList(answers, questions) {
+    let newContainer = document.createElement('div');
+    let newListUl = document.createElement('ol');
+    newListUl.id = 'quiz-info-content';
+    for (var i = 0; i < answers.length; i++) {
+        let newListItem = document.createElement('li')
+        newListItem.textContent = questions[i];
+        // newListItem.addEventListener("click", function() {functionName();}, false);
+        newListItem.id = "answer-" + i;
+
+        newListUl.appendChild(newListItem);
+
+    }
+    newContainer.appendChild(newListUl);
+    return newContainer;
+}
+
+function functionName() {
+    console.log("I have been clicked");
+}
 
 function countdown() {
     var timeLeft = 60;
