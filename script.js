@@ -1,8 +1,13 @@
 console.log(document);
 
 var containerEl = document.getElementById('header-container');
-document.get
 console.log(containerEl);
+
+var headerEl = document.getElementById('quiz-header');
+console.log('this is my header', headerEl);
+
+// var infoEl = document.getElementById('quiz-info');
+// console.log(infoEl);
 
 var highscoresEl = document.getElementById('highscores');
 console.log(highscoresEl);
@@ -81,16 +86,23 @@ function quizStart() {
         var question = myQuestions[currentIndex];
         console.log(question)
 
+        // replace header with question
+        replaceHeader(question?.question);
 
-    // startEl.click();
-    // if ("click") {
-    //     displayQuestion();
-    //     countdown();
-    //     document.getElementById("#quiz-start").click();
-    //     console.log("help?");
-    //     }
+        // create html list of questions from myQuestions
+
+
+        // replace quiz-info with created html list
+
+        // iterating current index
 }
 
+function replaceHeader(question) {
+    let newHeaderEl = document.createElement('h2')
+    newHeaderEl.textContent = question; 
+    headerEl.replaceWith(newHeaderEl);
+
+}
 
 
 function countdown() {

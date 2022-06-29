@@ -20,12 +20,14 @@ header {
     text-align: left;
     width: 30%;
 }
+
 #countdown {
     text-align: right;
     width: 30%;
     margin: none;
     justify-self: right;
 }
+
 .card {
   display: block;
   background-color:#FFFFE0;;
