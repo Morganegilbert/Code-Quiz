@@ -22,56 +22,36 @@ var currentIndex = 0;
 var myQuestions = [
     {
         question: 'Commonly used data types DO NOT include:',
-        answers: {
-                a:'Strings',
-                b: 'B. Booleans', 
-                c: 'Alerts', 
-                d: 'Numbers', 
-        },
-        correctAnswer: '',
+        answers: ['a', 'b', 'c', 'd'],
+        questions: ['Strings','Booleans', 'Alerts', 'Numbers'],
+        correctAnswer: 'c',
     },
 
     {
         question: 'The condition in an if/else statement is enclosed within _____.',
-        answers: {
-            a: 'Quotes', 
-            b: 'Curly brackets', 
-            c: 'Parenthesis', 
-            d: 'Square brackets',
-        },
+        answers:  ['a', 'b', 'c', 'd'],
+        questions: ['Quotes', 'Curly brackets', 'Parenthesis', 'Square brackets'],
         correctAnswer: 'c',
     },
 
     {
         question: 'Arrays in JavaScript can be used to store ____.',
-        answers: {
-            a: 'Numbers and strings', 
-            b: 'Other arrays', 
-            c: 'Booleans', 
-            d: 'All of the above',
-        },
+        answers:  ['a', 'b', 'c', 'd'],
+        questions: ['Numbers and strings', 'Other arrays', 'Booleans', 'All of the above'],
         correctAnswer: 'c',
     },
 
     {
         question: 'String values must be enclosed within ____ when being assigned to variables.',
-        answers: {
-            a: 'Commas', 
-            b: 'Curly brackets', 
-            c: 'Quotes', 
-            d: 'Parentheses',
-        },
+        answers:   ['a', 'b', 'c', 'd'],
+        questions: ['Commas', 'Curly brackets', 'Quotes', 'Parentheses'],
         correctAnswer: 'c',
     },
 
     {
         question: 'A veru useful tool used during development and debugging for printing content to the debugger is:',
-        answers: {
-            a: 'JavaScript', 
-            b: 'Terminal/bash', 
-            c: 'For loops', 
-            d: 'Console.log',
-        },
+        answers:   ['a', 'b', 'c', 'd'],
+        questions: ['JavaScript', 'Terminal/bash', 'For loops', 'Console.log'],
         correctAnswer: 'd',
     }
     
@@ -100,6 +80,8 @@ function quizStart() {
 
         var question = myQuestions[currentIndex];
         console.log(question)
+
+
     // startEl.click();
     // if ("click") {
     //     displayQuestion();
