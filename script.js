@@ -1,10 +1,25 @@
-var timerEl = document.getElementById('.countdown');
-var mainEl = document.getElementById('main');
+console.log(document);
 
-var button = document.querySelector(".button");
+var containerEl = document.getElementById('header-container');
+document.get
+console.log(containerEl);
+
+var highscoresEl = document.getElementById('highscores');
+console.log(highscoresEl);
+
+var timerEl = document.getElementById('countdown');
+// var mainEl = document.getElementById('main');
+console.log(timerEl);
+
+var startEl = document.getElementById('start-quiz');
+console.log(startEl);
+
+// var button = document.querySelector(".button");
+
+startEl.addEventListener("click", function() {quizStart(); }, false);
 
 var currentIndex = 0;
-const myQuestions = [
+var myQuestions = [
     {
         question: 'Commonly used data types DO NOT include:',
         answers: {
@@ -14,7 +29,9 @@ const myQuestions = [
                 d: 'Numbers', 
         },
         correctAnswer: '',
+    },
 
+    {
         question: 'The condition in an if/else statement is enclosed within _____.',
         answers: {
             a: 'Quotes', 
@@ -23,7 +40,9 @@ const myQuestions = [
             d: 'Square brackets',
         },
         correctAnswer: 'c',
+    },
 
+    {
         question: 'Arrays in JavaScript can be used to store ____.',
         answers: {
             a: 'Numbers and strings', 
@@ -32,7 +51,9 @@ const myQuestions = [
             d: 'All of the above',
         },
         correctAnswer: 'c',
+    },
 
+    {
         question: 'String values must be enclosed within ____ when being assigned to variables.',
         answers: {
             a: 'Commas', 
@@ -41,7 +62,9 @@ const myQuestions = [
             d: 'Parentheses',
         },
         correctAnswer: 'c',
+    },
 
+    {
         question: 'A veru useful tool used during development and debugging for printing content to the debugger is:',
         answers: {
             a: 'JavaScript', 
@@ -50,31 +73,43 @@ const myQuestions = [
             d: 'Console.log',
         },
         correctAnswer: 'd',
-
     }
+    
 ];
 
-// button.addEventListener("click", function (quizStart){
-
-
+// startEl.addEventListener("click", function (){
+//     countdown();
 // }
 // );
 
-function displayQuestion() {
-    // var currentQuestion = questions[currentIndex];
+// startEl.onclick = function() {
+//     countdown();
+//     console.log("great...");
+// }
 
-    // Element.textContent = currentQuestion.question;
-    }
+function displayQuestion() {
+    var currentQuestion = myQuestions[currentIndex];
+
+    Element.textContent = currentQuestion.myQuestions;
+}
 
 function quizStart() {
     // var questionChoice = answer; 
-    if ("click") {
-        displayQuestion();
-        countdown();
-        // document.getElementById("quizStart").click();
-        console.log();
-        }
+    console.log(myQuestions);
+    console.log(currentIndex)
+
+        var question = myQuestions[currentIndex];
+        console.log(question)
+    // startEl.click();
+    // if ("click") {
+    //     displayQuestion();
+    //     countdown();
+    //     document.getElementById("#quiz-start").click();
+    //     console.log("help?");
+    //     }
 }
+
+
 
 function countdown() {
     var timeLeft = 60;
@@ -118,7 +153,7 @@ function countdown() {
 //     var msgInterval = 
 // }
 
-quizStart();
+// quizStart();
 
 // var results = {
 
