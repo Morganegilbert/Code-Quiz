@@ -19,9 +19,12 @@ var quizInfoContent = document.getElementById('quiz-info-content');
 console.log(quizInfoContent);
 // var button = document.querySelector(".button");
 
-startEl.addEventListener("click", function() {quizStart(); }, false);
+startEl.addEventListener("click", function() {quizStart(); countdown();}, false);
 
 var currentIndex = 0;
+var timeLeft = 60;
+var timeCaptured = 0;
+
 var myQuestions = [
     {
         question: 'Commonly used data types DO NOT include:',
@@ -34,14 +37,14 @@ var myQuestions = [
         question: 'The condition in an if/else statement is enclosed within _____.',
         answers:  ['a', 'b', 'c', 'd'],
         questions: ['Quotes', 'Curly brackets', 'Parenthesis', 'Square brackets'],
-        correctAnswer: 'c',
+        correctAnswer: 'b',
     },
 
     {
         question: 'Arrays in JavaScript can be used to store ____.',
         answers:  ['a', 'b', 'c', 'd'],
         questions: ['Numbers and strings', 'Other arrays', 'Booleans', 'All of the above'],
-        correctAnswer: 'c',
+        correctAnswer: 'd',
     },
 
     {
@@ -52,7 +55,7 @@ var myQuestions = [
     },
 
     {
-        question: 'A veru useful tool used during development and debugging for printing content to the debugger is:',
+        question: 'A very useful tool used during development and debugging for printing content to the debugger is:',
         answers:   ['a', 'b', 'c', 'd'],
         questions: ['JavaScript', 'Terminal/bash', 'For loops', 'Console.log'],
         correctAnswer: 'd',
@@ -96,14 +99,20 @@ function quizStart() {
         assignListFunctionality(question?.answers, question?.questions);
 
         // iterating current index
-        currentIndex++;
+        // currentIndex++;
+
+        // remove quiz button
+        if (startEl) {
+            startEl.remove();
+        }
+
 }
 
 function assignListFunctionality(answers,questions) {
     for (var i = 0; i < answers.length; i++) {
-        let listItem = document.getElementById('answer-' + i);
-        listItem.addEventListener("click", function() {functionName();}, false);
-
+        let listItem = document.getElementById(answers[i]);
+        listItem.addEventListener("click", function(event) {selectAnswer(event);}, false);
+            
     }
 }
 
@@ -119,10 +128,10 @@ function createList(answers, questions) {
     let newListUl = document.createElement('ol');
     newListUl.id = 'quiz-info-content';
     for (var i = 0; i < answers.length; i++) {
-        let newListItem = document.createElement('li')
+        let newListItem = document.createElement('li');
         newListItem.textContent = questions[i];
         // newListItem.addEventListener("click", function() {functionName();}, false);
-        newListItem.id = "answer-" + i;
+        newListItem.id = answers[i];
 
         newListUl.appendChild(newListItem);
 
@@ -131,12 +140,64 @@ function createList(answers, questions) {
     return newContainer;
 }
 
-function functionName() {
-    console.log("I have been clicked");
+function selectAnswer(event) {
+    var answer = myQuestions[currentIndex].correctAnswer;
+    console.log(answer === event.target.id);
+
+    if (answer === event.target.id) {
+        console.log("i have correct answer");
+        currentIndex++; 
+        quizStart();
+    } else {
+        currentIndex++
+        timeLeft = timeLeft - 10;
+        console.log('time left now is', timeLeft);
+        quizStart();
+    }
+}
+
+function pageSubmission() {
+    console.log("we are starting to replace content");
+    // header change to All Done!
+    replaceHeader('All done!');
+
+    let newContainer = document.createElement('div');
+    newContainer.id = 'quiz-info-content';
+
+    // List final score in info
+    let spanItem = document.createElement('span');
+    spanItem.textContent = 'Your final score is ' + timeCaptured;
+    newContainer.appendChild(spanItem);
+
+
+    // Enter initials input box
+    var form = createSubmissionForm();
+    newContainer.appendChild(form);
+    infoEl.innerHTML = newContainer.innerHTML;
+
+}
+
+function createSubmissionForm() {
+    let form = document.createElement('form');
+    form.method = "POST";
+
+    let label = document.createElement('label');
+    let span = document.createElement('span');
+    span.textContent = 'Enter Initials:';
+    
+    let input = document.createElement('input');
+    input.name = 'initials';
+
+
+    label.appendChild(span);
+    label.appendChild(input);
+    form.appendChild(label);
+
+    return form;
 }
 
 function countdown() {
-    var timeLeft = 60;
+
   
     // TODO: Add a comment describing the functionality of the setInterval() method:
     var timeInterval = setInterval(function () {
@@ -152,7 +213,7 @@ function countdown() {
       else {
         timerEl.textContent = 'Time: 0';
         clearInterval(timeInterval);
-        displayMessage();
+        pageSubmission();
       }
     }, 1000);
   }
