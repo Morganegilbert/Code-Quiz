@@ -82,6 +82,8 @@ function displayQuestion() {
 function quizStart() {
     // var questionChoice = answer; 
 
+    if (currentIndex != myQuestions.length) {
+
         var question = myQuestions[currentIndex];
         console.log(question);
 
@@ -105,6 +107,11 @@ function quizStart() {
         if (startEl) {
             startEl.remove();
         }
+    } else {
+        timeCaptured = timeLeft;
+        pageSubmission();
+
+    }
 
 }
 
@@ -157,7 +164,6 @@ function selectAnswer(event) {
 }
 
 function pageSubmission() {
-    console.log("we are starting to replace content");
     // header change to All Done!
     replaceHeader('All done!');
 
@@ -175,11 +181,22 @@ function pageSubmission() {
     newContainer.appendChild(form);
     infoEl.innerHTML = newContainer.innerHTML;
 
+    // add even handler for form submission
+    document.getElementById('submit-button').addEventListener('click', formSubmission);
+}
+
+function formSubmission(event) {
+    event.preventDefault();
+    var initialsInput = document.getElementById('initials-input');
+    console.log("This is initialInput", initialsInput.value);
+    console.log("This is the form event", event);
+
 }
 
 function createSubmissionForm() {
-    let form = document.createElement('form');
-    form.method = "POST";
+    let div = document.createElement('div');
+    div.id = "quiz-form";
+    // form.method = "POST";
 
     let label = document.createElement('label');
     let span = document.createElement('span');
@@ -187,13 +204,21 @@ function createSubmissionForm() {
     
     let input = document.createElement('input');
     input.name = 'initials';
+    input.type = 'text';
+    input.id = 'initials-input'
 
+    let submitInput = document.createElement('input');
+    submitInput.type = 'submit';
+    submitInput.value = 'submit';
+    submitInput.id = 'submit-button';
+    // submitInput.value = 'Submit';
 
     label.appendChild(span);
     label.appendChild(input);
-    form.appendChild(label);
+    div.appendChild(submitInput);
+    div.appendChild(label);
 
-    return form;
+    return div;
 }
 
 function countdown() {
