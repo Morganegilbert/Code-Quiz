@@ -24,6 +24,7 @@ startEl.addEventListener("click", function() {quizStart(); countdown();}, false)
 var currentIndex = 0;
 var timeLeft = 60;
 var timeCaptured = 0;
+// localStorage.setItem('highscores', JSON.stringify([]));
 
 var myQuestions = [
     {
@@ -188,9 +189,19 @@ function pageSubmission() {
 function formSubmission(event) {
     event.preventDefault();
     var initialsInput = document.getElementById('initials-input');
-    console.log("This is initialInput", initialsInput.value);
-    console.log("This is the form event", event);
+    // console.log("This is initialInput", initialsInput.value);
+    // console.log("This is the form event", event);
+    let localHighscores = JSON.parse(localStorage.getItem('highscores') || "[]"); 
+    localHighscores.push({initials:initialsInput.value, time:timeCaptured});
+    console.log("here are the highscores", localHighscores);
+    
+    // Not sure if sort will work
+    localHighscores.sort((a,b) => (b.time - a.time));
+    
+    localStorage.setItem('highscores', JSON.stringify(localHighscores));
 
+    // Update to high scores view
+    renderHighscoresView();
 }
 
 function createSubmissionForm() {
@@ -207,10 +218,12 @@ function createSubmissionForm() {
     input.type = 'text';
     input.id = 'initials-input'
 
-    let submitInput = document.createElement('input');
-    submitInput.type = 'submit';
-    submitInput.value = 'submit';
-    submitInput.id = 'submit-button';
+    let submitInput = document.createElement('div');
+    submitInput.innerHTML = '<button type="submit" id="submit-button" value="submit">Submit</button>';
+    // submitInput.type = 'submit';
+    // submitInput.value = 'submit';
+    // submitInput.id = 'submit-button';
+ 
     // submitInput.value = 'Submit';
 
     label.appendChild(span);
@@ -218,7 +231,27 @@ function createSubmissionForm() {
     div.appendChild(submitInput);
     div.appendChild(label);
 
+    
     return div;
+}
+
+function renderHighscoresView() {
+    // update header
+    replaceHeader('Highscores');
+
+    //list high scores
+    var scores = createHighscoresList();
+    infoEl.innerHTML = scores.innerHTML;
+    document.getElementById('clear-highscores-button').addEventListener('click', function(event){
+        localStorage.removeItem('highscores');
+        location.reload();
+
+    })
+
+    document.getElementById('back-button').addEventListener('click', function(event){
+        location.reload();
+    });
+    
 }
 
 function countdown() {
@@ -238,10 +271,39 @@ function countdown() {
       else {
         timerEl.textContent = 'Time: 0';
         clearInterval(timeInterval);
-        pageSubmission();
+        renderHighscoresView();
       }
     }, 1000);
   }
+
+function createHighscoresList() {
+    let newContainer = document.createElement('div');
+    let newListUl = document.createElement('ol');
+    newListUl.id = 'quiz-info-content';
+    let localHighscores = JSON.parse(localStorage.getItem('highscores') || "[]"); 
+
+    for (var i = 0; i < localHighscores.length; i++) {
+        let newListItem = document.createElement('li');
+        newListItem.textContent = localHighscores[i].initials + '-' + localHighscores[i].time;
+        // newListItem.addEventListener("click", function() {functionName();}, false);
+
+        newListUl.appendChild(newListItem);
+
+    }
+    let backButton = document.createElement('div');
+    backButton.innerHTML = '<button type="submit" id="back-button" value="submit">Go Back</button>';
+    // backButton.value = 'Go Back';
+    
+    let clearHighscores = document.createElement('div');
+    clearHighscores.innerHTML = '<button type="submit" id="clear-highscores-button" value="submit">Clear Highscores</button>';
+    // clearHighscores.value = 'Clear Highscores';
+
+    newContainer.appendChild(newListUl);
+    newContainer.appendChild(backButton);
+    newContainer.appendChild(clearHighscores);
+
+    return newContainer;
+}
 
 
 // object.addEventListener("click", "keypress", function(event) {
