@@ -54,7 +54,7 @@ var myQuestions = [
     {
         question: 'A very useful tool used during development and debugging for printing content to the debugger is:',
         answers:   ['a', 'b', 'c', 'd'],
-        questions: ['1. JavaScript', '2. erminal/bash', '3. For loops', '4. Console.log'],
+        questions: ['1. JavaScript', '2. Terminal/bash', '3. For loops', '4. Console.log'],
         correctAnswer: 'd',
     }
     
