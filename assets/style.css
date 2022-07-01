@@ -8,27 +8,73 @@ body {
   font-size: 16px;
   font-family: "Roboto", sans-serif;
   background-color: #eff5f8;
+  display: flex;
+  flex-direction: column;
 }
 
 header {
-    height: 5vw;
+    width: 100%;
+    height: auto;
     justify-content: space-between;
-    display: inline;
+    flex-direction: row;
+    display: flex;
+}
+
+.header-container div {
+    align-self: center;
+    display: inline-flex;
+    justify-content: space-between;
+    flex-wrap: wrap;    
+    flex: 1;
 }
 
 #highscores {
-    text-align: left;
-    width: 30%;
+    /* text-align: left; */
+    /* width: 20vw; */
 }
 
 #countdown {
     text-align: right;
-    width: 30%;
-    margin: none;
-    justify-self: right;
+    width: 20vw;
+    /* margin: none; */
+    justify-content: right;
+    /* align-items: right; */
 }
 
 .card {
+
+  background-color:#FFFFE0;;
+  border: 1px solid #eceff1;
+  border-radius: 8px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0 1px 2px 0,
+    rgba(60, 64, 67, 0.15) 0 1px 3px 1px;
+  margin: 40px auto;
+  padding: 20px;
+  width: 40vw;
+  /* display: flex; */  
+  display: flexbox;
+  flex: 1;
+}
+
+/* .card::after {
+  content: " ";
+  display: block;
+  clear: both;  
+} */
+
+.quiz-box {
+    text-align: center;
+}
+
+#quiz-header {
+    height: fit-content;
+}
+
+#quiz-info-content {
+    text-align: left;
+}
+
+ul {
   display: block;
   background-color:#FFFFE0;;
   border: 1px solid #eceff1;
@@ -38,16 +84,6 @@ header {
   margin: 40px auto;
   padding: 20px;
   width: 40vw;
-}
-
-.card::after {
-  content: " ";
-  display: block;
-  clear: both;  
-}
-
-.quiz-box {
-    text-align: center;
 }
 
 h2 {
@@ -75,6 +111,57 @@ button {
   /* float: right; */
 }
 
+li {
+    background-color: #001b44;
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.2em;
+    letter-spacing: 0.21px;
+    line-height: 16px;
+    max-width: 255px;
+    padding: 10px 22px;
+    text-align: center;
+    /* transition-duration: 0.15s; */
+    transition-property: background-color;
+    /* transition-timing-function: linear; */
+    margin-top: 0.6em;
+    /* justify-self: center; */
+  }
+
+
+
+#quiz-form {
+    display: flex;
+    }
+
+#quiz-form div {
+    }
+
+label {
+
+}
+
+.footer {
+    color: black;
+    text-align: center;
+    /* width: 200px; */
+    /* height: 10vh; */
+    display: flexbox;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+footer {
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* #submit-button {
+    content: "Submit";
+} */
 
 /* .input-group {
   margin-top: 10px;
