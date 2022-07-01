@@ -32,35 +32,35 @@ var myQuestions = [
     {
         question: 'Commonly used data types DO NOT include:',
         answers: ['a', 'b', 'c', 'd'],
-        questions: ['Strings','Booleans', 'Alerts', 'Numbers'],
+        questions: ['1. Strings','2. Booleans', '3. Alerts', '4. Numbers'],
         correctAnswer: 'c',
     },
 
     {
         question: 'The condition in an if/else statement is enclosed within _____.',
         answers:  ['a', 'b', 'c', 'd'],
-        questions: ['Quotes', 'Curly brackets', 'Parenthesis', 'Square brackets'],
+        questions: ['1. Quotes', '2. Curly brackets', '3. Parenthesis', '4. Square brackets'],
         correctAnswer: 'b',
     },
 
     {
         question: 'Arrays in JavaScript can be used to store ____.',
         answers:  ['a', 'b', 'c', 'd'],
-        questions: ['Numbers and strings', 'Other arrays', 'Booleans', 'All of the above'],
+        questions: ['1. Numbers and strings', '2. Other arrays', '3. Booleans', '4. All of the above'],
         correctAnswer: 'd',
     },
 
     {
         question: 'String values must be enclosed within ____ when being assigned to variables.',
         answers:   ['a', 'b', 'c', 'd'],
-        questions: ['Commas', 'Curly brackets', 'Quotes', 'Parentheses'],
+        questions: ['1. Commas', '2. Curly brackets', '3. Quotes', '4. Parentheses'],
         correctAnswer: 'c',
     },
 
     {
         question: 'A very useful tool used during development and debugging for printing content to the debugger is:',
         answers:   ['a', 'b', 'c', 'd'],
-        questions: ['JavaScript', 'Terminal/bash', 'For loops', 'Console.log'],
+        questions: ['1. JavaScript', '2. erminal/bash', '3. For loops', '4. Console.log'],
         correctAnswer: 'd',
     }
     
@@ -112,6 +112,7 @@ function quizStart() {
         }
     } else {
         timeCaptured = timeLeft;
+        timeLeft = 0;
         pageSubmission();
 
     }
@@ -157,20 +158,21 @@ function selectAnswer(event) {
     if (answer === event.target.id) {
         console.log("i have correct answer");
         currentIndex++; 
-        setTimeout(function() { quizStart(); }, 1000);
+        setTimeout(function() { quizStart(); }, 500);
         correct();
     } else {
         currentIndex++
         timeLeft = timeLeft - 10;
         console.log('time left now is', timeLeft);
-        setTimeout(function() { quizStart(); }, 1000);
+        setTimeout(function() { quizStart(); }, 500);
         wrong();
     }
 }
 
 function correct(event) {
     // let footerEl = document.createElement('footer');   
-    replaceFooter('Correct!');
+    document.querySelector('footer').innerHTML = "Correct!"
+    setTimeout(function() {document.querySelector('footer').innerHTML = ''}, 500);
     // footer.name = ('Correct!');
     // footer.id = ('answer-result');
     console.log("This is footer? correct", footerEl);
@@ -178,7 +180,9 @@ function correct(event) {
 
 function wrong(event) {
     // let footerEl = document.createElement('footer');
-    replaceFooter('Wrong!');
+    document.querySelector('footer').innerHTML = "Wrong!"
+    setTimeout(function() {document.querySelector('footer').innerHTML = ''}, 500);
+
     // footer.name = ('Wrong!');
     // footer.id = ('answer-result');
     // footer.innerHTML = '<button type="submit" id="submit-button" value="submit">Submit</button>';
@@ -273,7 +277,9 @@ function renderHighscoresView() {
     document.getElementById('back-button').addEventListener('click', function(event){
         location.reload();
     });
-    
+    if (startEl) {
+        startEl.remove();
+    }
 }
 
 function countdown() {
@@ -293,7 +299,7 @@ function countdown() {
       else {
         timerEl.textContent = 'Time: 0';
         clearInterval(timeInterval);
-        renderHighscoresView();
+        pageSubmission();
       }
     }, 1000);
   }

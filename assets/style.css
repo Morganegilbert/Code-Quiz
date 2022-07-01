@@ -29,8 +29,7 @@ header {
 }
 
 #highscores {
-    /* text-align: left; */
-    /* width: 20vw; */
+    cursor: pointer;
 }
 
 #countdown {
@@ -50,7 +49,7 @@ header {
     rgba(60, 64, 67, 0.15) 0 1px 3px 1px;
   margin: 40px auto;
   padding: 20px;
-  width: 40vw;
+  width: 60vw;
   /* display: flex; */  
   display: flexbox;
   flex: 1;
@@ -111,7 +110,11 @@ button {
   /* float: right; */
 }
 
-li {
+button:hover {
+    background-color: #43a5cc;
+}
+
+#a, #b, #c, #d {
     background-color: #001b44;
     border-radius: 8px;
     color: #fff;
@@ -121,32 +124,45 @@ li {
     line-height: 16px;
     max-width: 255px;
     padding: 10px 22px;
-    text-align: center;
-    /* transition-duration: 0.15s; */
+    text-align: left;
     transition-property: background-color;
-    /* transition-timing-function: linear; */
     margin-top: 0.6em;
-    /* justify-self: center; */
   }
 
+  #a:hover {
+    background-color: #43a5cc;
+  }
+
+  #b:hover {
+    background-color: #43a5cc;
+  }
+  #c:hover {
+    background-color: #43a5cc;
+  }
+  #d:hover {
+    background-color: #43a5cc;
+  }
+  
+
+li {
+    margin: 10px;
+}
 
 
 #quiz-form {
     display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: row-reverse;
     }
 
-#quiz-form div {
-    }
-
-label {
-
-}
 
 .footer {
     color: black;
     text-align: center;
-    /* width: 200px; */
-    /* height: 10vh; */
+    font-size: 25px;
+    font-style: italic;
     display: flexbox;
     flex: 1;
     justify-content: center;
@@ -154,7 +170,7 @@ label {
 }
 
 footer {
-    color: black;
+    color: darkgray;
     display: flex;
     justify-content: center;
     align-items: center;
