@@ -17,8 +17,6 @@ var quizInfoContent = document.getElementById('quiz-info-content');
 
 var footerEl = document.getElementsByClassName('footer');
 
-startEl.addEventListener("click", function() {quizStart(); countdown();}, false);
-
 var currentIndex = 0;
 var timeLeft = 60;
 var timeCaptured = 0;
@@ -62,15 +60,11 @@ var myQuestions = [
     
 ];
 
-// Function displays question
-// function displayQuestion() {
-//     var currentQuestion = myQuestions[currentIndex];
+// Start quiz activates on click and starts quizStart function
+startEl.addEventListener("click", function() {quizStart(); countdown();}, false);
 
-//     Element.textContent = currentQuestion.myQuestions;
-// }
-
+// Function activates quiz after start quiz button clicked
 function quizStart() {
-    // var questionChoice = answer; 
 
     if (currentIndex != myQuestions.length) {
 
@@ -83,17 +77,13 @@ function quizStart() {
         // create html list of questions from myQuestions
         var list = createList(question?.answers, question?.questions);
         
-
         // replace quiz-info with created html list
         infoEl.innerHTML = list.innerHTML;
 
-        // asign list functionality
+        // Assigns list functionality
         assignListFunctionality(question?.answers, question?.questions);
 
-        // iterating current index
-        // currentIndex++;
-
-        // remove quiz button
+        // Removes start quiz button 
         if (startEl) {
             startEl.remove();
         }
@@ -101,11 +91,10 @@ function quizStart() {
         timeCaptured = timeLeft;
         timeLeft = 0;
         pageSubmission();
-
     }
-
 }
 
+// Assigns functionality to answers list
 function assignListFunctionality(answers,questions) {
     for (var i = 0; i < answers.length; i++) {
         let listItem = document.getElementById(answers[i]);
@@ -114,6 +103,7 @@ function assignListFunctionality(answers,questions) {
     }
 }
 
+// Replaces header with question
 function replaceHeader(question) {
     let newHeaderEl = document.createElement('h2');
     newHeaderEl.id = 'quiz-header-content';
@@ -121,6 +111,7 @@ function replaceHeader(question) {
     quizHeaderContent.innerHTML = newHeaderEl.innerHTML;
 }
 
+// Replaces quiz info with question list
 function createList(answers, questions) {
     let newContainer = document.createElement('div');
     let newListUl = document.createElement('ol');
@@ -128,59 +119,45 @@ function createList(answers, questions) {
     for (var i = 0; i < answers.length; i++) {
         let newListItem = document.createElement('li');
         newListItem.textContent = questions[i];
-        // newListItem.addEventListener("click", function() {functionName();}, false);
         newListItem.id = answers[i];
-
         newListUl.appendChild(newListItem);
-
     }
     newContainer.appendChild(newListUl);
     return newContainer;
 }
 
+// Activates event on answer selection, if correct moves on, if incorrect removes 10 seconds and moves on
 function selectAnswer(event) {
     var answer = myQuestions[currentIndex].correctAnswer;
-    console.log(answer === event.target.id);
 
     if (answer === event.target.id) {
-        console.log("i have correct answer");
         currentIndex++; 
         setTimeout(function() { quizStart(); }, 500);
         correct();
     } else {
         currentIndex++
         timeLeft = timeLeft - 10;
-        console.log('time left now is', timeLeft);
         setTimeout(function() { quizStart(); }, 500);
         wrong();
     }
 }
 
+// If answer is correct, changes footer to correct
 function correct(event) {
-    // let footerEl = document.createElement('footer');   
     document.querySelector('footer').innerHTML = "Correct!"
     setTimeout(function() {document.querySelector('footer').innerHTML = ''}, 500);
-    // footer.name = ('Correct!');
-    // footer.id = ('answer-result');
-    console.log("This is footer? correct", footerEl);
 }
 
+// If answer is wrong, changes footer to wrong
 function wrong(event) {
-    // let footerEl = document.createElement('footer');
     document.querySelector('footer').innerHTML = "Wrong!"
     setTimeout(function() {document.querySelector('footer').innerHTML = ''}, 500);
-
-    // footer.name = ('Wrong!');
-    // footer.id = ('answer-result');
-    // footer.innerHTML = '<button type="submit" id="submit-button" value="submit">Submit</button>';
-    console.log("This is footer? wrong", footerEl);
-
 }
 
+// Activates once last question is completed
 function pageSubmission() {
     // header change to All Done!
     replaceHeader('All done!');
-
     let newContainer = document.createElement('div');
     newContainer.id = 'quiz-info-content';
 
@@ -195,32 +172,32 @@ function pageSubmission() {
     newContainer.appendChild(form);
     infoEl.innerHTML = newContainer.innerHTML;
 
-    // add even handler for form submission
+    // Adds even handler for form submission
     document.getElementById('submit-button').addEventListener('click', formSubmission);
 }
 
+// Adds initials and score to local storage
 function formSubmission(event) {
     event.preventDefault();
     var initialsInput = document.getElementById('initials-input');
-    // console.log("This is initialInput", initialsInput.value);
-    // console.log("This is the form event", event);
     let localHighscores = JSON.parse(localStorage.getItem('highscores') || "[]"); 
     localHighscores.push({initials:initialsInput.value, time:timeCaptured});
-    console.log("here are the highscores", localHighscores);
     
-    // Not sure if sort will work
+    // Sorts the high scores
     localHighscores.sort((a,b) => (b.time - a.time));
     
     localStorage.setItem('highscores', JSON.stringify(localHighscores));
 
-    // Update to high scores view
+    // Moves to Highscores page
     renderHighscoresView();
 }
 
+// This function creates the submission page for entering initials for highscore
 function createSubmissionForm() {
+
+    // Adds div, label, span, and input
     let div = document.createElement('div');
     div.id = "quiz-form";
-    // form.method = "POST";
 
     let label = document.createElement('label');
     let span = document.createElement('span');
@@ -233,44 +210,44 @@ function createSubmissionForm() {
 
     let submitInput = document.createElement('div');
     submitInput.innerHTML = '<button type="submit" id="submit-button" value="submit">Submit</button>';
-    // submitInput.type = 'submit';
-    // submitInput.value = 'submit';
-    // submitInput.id = 'submit-button';
- 
-    // submitInput.value = 'Submit';
 
+    // Adds child to parents
     label.appendChild(span);
     label.appendChild(input);
     div.appendChild(submitInput);
     div.appendChild(label);
 
-    
     return div;
 }
 
+// Creates highscores page
 function renderHighscoresView() {
-    // update header
+    // Changes header to Highscores
     replaceHeader('Highscores');
 
-    //list high scores
+    // Lists highscores
     var scores = createHighscoresList();
     infoEl.innerHTML = scores.innerHTML;
+
+    // Creates clear highscores button to remove from local storage
     document.getElementById('clear-highscores-button').addEventListener('click', function(event){
         localStorage.removeItem('highscores');
         location.reload();
-
     })
 
+    // Creates back button
     document.getElementById('back-button').addEventListener('click', function(event){
         location.reload();
     });
+
+    // Removes start quiz button from highscores page
     if (startEl) {
         startEl.remove();
     }
 }
 
+// Timer countdown function
 function countdown() {
-
   
     // TODO: Add a comment describing the functionality of the setInterval() method:
     var timeInterval = setInterval(function () {
@@ -291,6 +268,7 @@ function countdown() {
     }, 1000);
   }
 
+// Creates highscores list on highscores page
 function createHighscoresList() {
     let newContainer = document.createElement('div');
     let newListUl = document.createElement('ol');
@@ -305,44 +283,19 @@ function createHighscoresList() {
         newListUl.appendChild(newListItem);
 
     }
+
+    // Creates button for back button
     let backButton = document.createElement('div');
     backButton.innerHTML = '<button type="submit" id="back-button" value="submit">Go Back</button>';
-    // backButton.value = 'Go Back';
     
+    // Creates button for submit button
     let clearHighscores = document.createElement('div');
     clearHighscores.innerHTML = '<button type="submit" id="clear-highscores-button" value="submit">Clear Highscores</button>';
-    // clearHighscores.value = 'Clear Highscores';
 
+    // Appends children to parents
     newContainer.appendChild(newListUl);
     newContainer.appendChild(backButton);
     newContainer.appendChild(clearHighscores);
 
     return newContainer;
 }
-
-
-// object.addEventListener("click", "keypress", function(event) {
-//   event.preventDefault();
-
-//   set new submission to local storage 
-//   if ("click", event.key === "Enter") {
-//     event.preventDefault();
-//     document.getElementById("quizStart").click();
-//     console.log();
-//     }
-//   localStorage.setItem(user)
-  
-// });
-
-// function displayQuiz() {
-//     var wordCount = 0;
-
-//     var msgInterval = 
-// }
-
-// quizStart();
-
-// var results = {
-
-// }
-// localStorage.setItem(input, J)
