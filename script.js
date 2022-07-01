@@ -1,4 +1,4 @@
-
+// Global elements
 var containerEl = document.getElementById('header-container');
 
 var headerEl = document.getElementById('quiz-header');
@@ -8,16 +8,12 @@ var infoEl = document.getElementById('quiz-info');
 var highscoresEl = document.getElementById('highscores');
 
 var timerEl = document.getElementById('countdown');
-// var mainEl = document.getElementById('main');
 
 var startEl = document.getElementById('start-quiz');
 
 var quizHeaderContent = document.getElementById('quiz-header-content');
-console.log(quizHeaderContent);
 
 var quizInfoContent = document.getElementById('quiz-info-content');
-console.log(quizInfoContent);
-// var button = document.querySelector(".button");
 
 var footerEl = document.getElementsByClassName('footer');
 
@@ -26,8 +22,8 @@ startEl.addEventListener("click", function() {quizStart(); countdown();}, false)
 var currentIndex = 0;
 var timeLeft = 60;
 var timeCaptured = 0;
-// localStorage.setItem('highscores', JSON.stringify([]));
 
+// Questions and answers
 var myQuestions = [
     {
         question: 'Commonly used data types DO NOT include:',
@@ -66,21 +62,12 @@ var myQuestions = [
     
 ];
 
-// startEl.addEventListener("click", function (){
-//     countdown();
+// Function displays question
+// function displayQuestion() {
+//     var currentQuestion = myQuestions[currentIndex];
+
+//     Element.textContent = currentQuestion.myQuestions;
 // }
-// );
-
-// startEl.onclick = function() {
-//     countdown();
-//     console.log("great...");
-// }
-
-function displayQuestion() {
-    var currentQuestion = myQuestions[currentIndex];
-
-    Element.textContent = currentQuestion.myQuestions;
-}
 
 function quizStart() {
     // var questionChoice = answer; 
