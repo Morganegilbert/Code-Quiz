@@ -19,6 +19,8 @@ var quizInfoContent = document.getElementById('quiz-info-content');
 console.log(quizInfoContent);
 // var button = document.querySelector(".button");
 
+var footerEl = document.getElementsByClassName('footer');
+
 startEl.addEventListener("click", function() {quizStart(); countdown();}, false);
 
 var currentIndex = 0;
@@ -155,13 +157,33 @@ function selectAnswer(event) {
     if (answer === event.target.id) {
         console.log("i have correct answer");
         currentIndex++; 
-        quizStart();
+        setTimeout(function() { quizStart(); }, 1000);
+        correct();
     } else {
         currentIndex++
         timeLeft = timeLeft - 10;
         console.log('time left now is', timeLeft);
-        quizStart();
+        setTimeout(function() { quizStart(); }, 1000);
+        wrong();
     }
+}
+
+function correct(event) {
+    // let footerEl = document.createElement('footer');   
+    replaceFooter('Correct!');
+    // footer.name = ('Correct!');
+    // footer.id = ('answer-result');
+    console.log("This is footer? correct", footerEl);
+}
+
+function wrong(event) {
+    // let footerEl = document.createElement('footer');
+    replaceFooter('Wrong!');
+    // footer.name = ('Wrong!');
+    // footer.id = ('answer-result');
+    // footer.innerHTML = '<button type="submit" id="submit-button" value="submit">Submit</button>';
+    console.log("This is footer? wrong", footerEl);
+
 }
 
 function pageSubmission() {
